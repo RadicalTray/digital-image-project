@@ -33,7 +33,9 @@
             packages = with pkgs; [
               python314
             ] ++ (with pkgs.python314Packages; [
+              python-lsp-server
               numpy
+              pandas
               torch
               torchvision
               matplotlib
