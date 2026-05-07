@@ -43,6 +43,21 @@
               opencv4
             ]);
           };
+          tensorflow = pkgs.mkShell {
+            packages = with pkgs; [
+              python313
+            ] ++ (with pkgs.python313Packages; [
+              python-lsp-server
+              numpy
+              pandas
+              torch
+              torchvision
+              matplotlib
+              pillow
+              opencv4
+              tensorflow
+            ]);
+          };
         }
       );
     };
