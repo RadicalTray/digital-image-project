@@ -5,9 +5,9 @@ from torchvision.io import decode_image
 from torch.utils.data import Dataset, DataLoader
 
 class ImageDataset(Dataset):
-    def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
-        self.img_labels = pd.read_csv(annotations_file)
-        self.img_dir = img_dir
+    def __init__(self, dataset_dir, transform=None, target_transform=None):
+        self.img_labels = pd.read_csv(os.path.join(dataset_dir, 'labels.csv'))
+        self.img_dir = os.path.join(dataset_dir, 'images')
         self.transform = transform
         self.target_transform = target_transform
 
@@ -24,7 +24,7 @@ class ImageDataset(Dataset):
             label = self.target_transform(label)
         return image, label
 
-ds = ImageDataset('./dataset/labels.csv', './dataset/images')
+ds = ImageDataset('./dataset')
 dataloader = DataLoader(ds, batch_size=64, shuffle=True)
 
 for features, labels in dataloader:
