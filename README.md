@@ -2,7 +2,6 @@
 
 ```py
 from torchvision.transforms import v2, InterpolationMode
-import matplotlib.pyplot as plt
 
 transform = v2.Compose([
     v2.ToImage(),
