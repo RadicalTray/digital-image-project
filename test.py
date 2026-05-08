@@ -24,16 +24,16 @@ class ImageDataset(Dataset):
             label = self.target_transform(label)
         return image, label
 
-ds = ImageDataset('./output/combined/labels.csv', './output/combined/images')
+ds = ImageDataset('./dataset/labels.csv', './dataset/images')
 dataloader = DataLoader(ds, batch_size=64, shuffle=True)
-features, labels = next(iter(dataloader))
 
-fig, ax = plt.subplots(nrows=8, ncols=8, squeeze=False)
-for i in range(8):
-    for j in range(8):
-        img = features[i * 8 + j].squeeze().transpose(0, 2)
-        label = labels[i * 8 + j]
-        ax[i, j].imshow(img)
-        ax[i, j].axis('off')
-        ax[i, j].set_title(label)
-plt.show()
+for features, labels in dataloader:
+    fig, ax = plt.subplots(nrows=8, ncols=8, squeeze=False)
+    for i in range(8):
+        for j in range(8):
+            img = features[i * 8 + j].squeeze().transpose(0, 2)
+            label = labels[i * 8 + j]
+            ax[i, j].imshow(img)
+            ax[i, j].axis('off')
+            ax[i, j].set_title(label)
+    plt.show()
